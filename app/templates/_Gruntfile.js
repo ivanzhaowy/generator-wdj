@@ -113,7 +113,7 @@ module.exports = function (grunt) {
                 sassDir : '<%= paths.app %>/compass/sass',
                 imagesDir : '<%= paths.app %>/compass/images',
                 fontsDir : '<%= paths.app %>/compass/fonts',
-                relativeAssets : false
+                relativeAssets : true
             },
             dist : {
                 options : {
