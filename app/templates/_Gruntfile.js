@@ -226,7 +226,8 @@ module.exports = function (grunt) {
                 reporters : ['progress'],
                 singleRun : true
             }
-        }
+        },
+        bumpup : ['package.json', 'bower.json']
     });
 
     grunt.registerTask('server', [
@@ -249,6 +250,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'bumpup',
         'clean:dist',
         'concurrent:dist',
         'useminPrepare',
