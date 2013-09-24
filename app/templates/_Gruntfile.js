@@ -227,7 +227,19 @@ module.exports = function (grunt) {
                 singleRun : true
             }
         },
-        bumpup : ['package.json', 'bower.json']
+        bump : {
+            options : {
+                files : ['package.json', 'bower.json'],
+                updateConfigs : [],
+                commit : true,
+                commitMessage : 'Release v%VERSION%',
+                commitFiles : ['-a'],
+                createTag : true,
+                tagName : 'v%VERSION%',
+                tagMessage : 'Version %VERSION%',
+                push : false
+            }
+        }
     });
 
     grunt.registerTask('server', [
@@ -250,7 +262,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'bumpup',
         'clean:dist',
         'concurrent:dist',
         'useminPrepare',
