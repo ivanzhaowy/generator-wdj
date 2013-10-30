@@ -169,7 +169,7 @@ module.exports = function (grunt) {
         concurrent: {
             dist : ['copy:dist', 'compass:dist']
         },
-        jslint : {
+        jshint : {
             test : {
                 src : [
                     '<%= paths.app %>/javascripts/**/*.js'
@@ -252,12 +252,12 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'jslint:test',
+        'jshint:all',
         'karma:test'
     ]);
 
     grunt.registerTask('test:travis', [
-        'jslint:test',
+        'jshint:all',
         'karma:travis'
     ]);
 

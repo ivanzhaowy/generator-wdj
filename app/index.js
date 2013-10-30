@@ -70,10 +70,11 @@ WdjAppGenerator.prototype.app = function app() {
     this.copy('_test-main.js', 'test/test-main.js');
 };
 
-WdjAppGenerator.prototype.projectfiles = function projectfiles () {
+WdjAppGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('bowerrc', '.bowerrc');
 
     this.copy('gitignore', '.gitignore');
     this.copy('_travis.yml', '.travis.yml');
     this.copy('editorconfig', '.editorconfig');
+    this.copy('jshintrc', '.jshintrc');
 };
