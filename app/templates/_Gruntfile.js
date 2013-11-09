@@ -170,33 +170,7 @@ module.exports = function (grunt) {
             dist : ['copy:dist', 'compass:dist']
         },
         jshint : {
-            test : {
-                src : [
-                    '<%= paths.app %>/javascripts/**/*.js'
-                ],
-                directives : {
-                    sloppy : true,
-                    vars : true,
-                    nomen : true,
-                    devel : true,
-                    browser : true,
-                    indent : 4,
-                    unparam: true,
-                    plusplus : true,
-                    todo : true,
-                    bitwise :  true,
-                    stupid : true,
-                    evil : true,
-                    regexp : true,
-                    ass : true,
-                    predef : [
-                        'define', 'require'
-                    ]
-                },
-                options : {
-                    errorsOnly : true
-                }
-            }
+            all : ['<%= paths.app %>/javascripts/**/*.js']
         },
         karma : {
             options : {
