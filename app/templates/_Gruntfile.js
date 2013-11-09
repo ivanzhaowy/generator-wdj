@@ -170,7 +170,7 @@ module.exports = function (grunt) {
             dist : ['copy:dist', 'compass:dist']
         },
         jshint : {
-            all : ['<%= paths.app %>/javascripts/**/*.js']
+            test : ['<%= paths.app %>/javascripts/**/*.js']
         },
         karma : {
             options : {
@@ -226,12 +226,12 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'jshint:all',
+        'jshint:test',
         'karma:test'
     ]);
 
     grunt.registerTask('test:travis', [
-        'jshint:all',
+        'jshint:test',
         'karma:travis'
     ]);
 
