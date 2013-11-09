@@ -27,7 +27,7 @@ module.exports = function (grunt) {
             },
             test : {
                 files : ['<%= paths.app %>/javascripts/**/*.js'],
-                tasks : ['jslint:test', 'karma:server:run'],
+                tasks : ['jshint:test', 'karma:server:run'],
                 options : {
                     spawn : false
                 }
