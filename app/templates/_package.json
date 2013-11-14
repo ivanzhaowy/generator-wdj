@@ -2,7 +2,10 @@
     "name" : "package",
     "version" : "0.0.0",
     "description" : "Put your description for this project here.",
-    "repository" : "",
+    "repository" : {
+        "type" : "git",
+        "url" : ""
+    },
     "dependencies" : {},
     "devDependencies" : {
         "matchdep" : "~0.1.2",
@@ -36,7 +39,8 @@
         "karma-coverage" : "~0.1.0",
         "karma-junit-reporter" : "~0.1.0",
         "karma-requirejs" : "~0.1.0",
-        "connect-livereload" : "~0.2.0"
+        "connect-livereload" : "~0.2.0",
+        "grunt-conventional-changelog" : "~1.0.0"
     },
     "engines" : {
         "node" : ">=0.8.0"
