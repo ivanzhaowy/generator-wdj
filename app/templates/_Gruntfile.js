@@ -51,11 +51,16 @@ module.exports = function (grunt) {
                 port : 9999,
                 hostname : '0.0.0.0'
             },
+            rules : [{
+                from : '^/index',
+                to : '/index.html'
+            }],
             server : {
                 options : {
                     middleware : function (connect) {
                         return [
                             lrSnippet,
+                            rewriteRulesSnippet,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, pathConfig.app)
                         ];
@@ -74,7 +79,7 @@ module.exports = function (grunt) {
             server : '<%= paths.tmp %>'
         },
         useminPrepare : {
-            html : ['<%= paths.app %>/*.html'],
+            html : ['<%= paths.app %>/**/*.html'],
             options : {
                 dest : '<%= paths.dist %>'
             }
@@ -111,6 +116,7 @@ module.exports = function (grunt) {
         compass : {
             options : {
                 sassDir : '<%= paths.app %>/compass/sass',
+                cssDir : '<%= paths.tmp %>/stylesheets',
                 imagesDir : '<%= paths.app %>/compass/images',
                 fontsDir : '<%= paths.app %>/compass/fonts',
                 relativeAssets : true
@@ -119,7 +125,8 @@ module.exports = function (grunt) {
                 options : {
                     cssDir : '<%= paths.dist %>/stylesheets',
                     generatedImagesDir : '<%= paths.dist %>/images',
-                    outputStyle : 'compressed'
+                    outputStyle : 'compressed',
+                    relativeAssets : false
                 }
             },
             server : {
@@ -130,13 +137,12 @@ module.exports = function (grunt) {
                 }
             }
         },
-        rev: {
-            dist: {
-                files: {
-                    src: [
+        rev : {
+            dist : {
+                files : {
+                    src : [
                         '<%= paths.dist %>/javascripts/**/*.js',
-                        '<%= paths.dist %>/stylesheets/**/*.css',
-                        '<%= paths.dist %>/images/**/*.*'
+                        '<%= paths.dist %>/stylesheets/**/*.css'
                     ]
                 }
             }
@@ -221,6 +227,7 @@ module.exports = function (grunt) {
         'compass:server',
         'connect:server',
         'karma:server',
+        'configureRewriteRules',
         'open',
         'watch'
     ]);
