@@ -32,8 +32,8 @@ module.exports = function (grunt) {
                     spawn : false
                 }
             },
-            livereload: {
-                files: [
+            livereload : {
+                files : [
                     '<%= paths.app %>/*.html',
                     '<%= paths.app %>/javascripts/**/*.js',
                     '<%= paths.app %>/images/**/*.*',
@@ -61,14 +61,14 @@ module.exports = function (grunt) {
                         return [
                             lrSnippet,
                             rewriteRulesSnippet,
-                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, pathConfig.tmp),
                             mountFolder(connect, pathConfig.app)
                         ];
                     }
                 }
             }
         },
-        open: {
+        open : {
             server : {
                 path : 'http://127.0.0.1:<%= connect.options.port %>',
                 app : 'Google Chrome Canary'
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
                 dest : '<%= paths.dist %>'
             }
         },
-        usemin: {
+        usemin : {
             html : ['<%= paths.dist %>/*.html'],
             options : {
                 dirs : ['<%= paths.dist %>']
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        concurrent: {
+        concurrent : {
             dist : ['copy:dist', 'compass:dist']
         },
         jshint : {
