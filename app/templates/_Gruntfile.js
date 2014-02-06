@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         paths : pathConfig,
         watch : {
             compass : {
-                files : ['<%= paths.app %>/compass/{,*/}*/{,*/}*.{scss,sass,png,ttf}'],
+                files : ['<%= paths.app %>/compass/{,*/}*/{,*/}*.{scss,sass,png,ttf,otf}'],
                 tasks : ['compass:server']
             },
             test : {
@@ -32,13 +32,13 @@ module.exports = function (grunt) {
                     spawn : false
                 }
             },
-            livereload : {
-                files : [
-                    '<%= paths.app %>/*.html',
+            livereload: {
+                files: [
+                    '<%= paths.app %>/**/*.html',
                     '<%= paths.app %>/javascripts/**/*.js',
-                    '<%= paths.app %>/images/**/*.*',
+                    '<%= paths.app %>/images/**/*.{webp,jpg,jpeg,png,gif,ttf,otf}',
                     '<%= paths.tmp %>/stylesheets/**/*.css',
-                    '<%= paths.tmp %>/images/**/*.*'
+                    '<%= paths.tmp %>/images/**/*.{webp,jpg,jpeg,png,gif,ttf,otf}'
                 ],
                 options : {
                     livereload : true,
@@ -51,16 +51,11 @@ module.exports = function (grunt) {
                 port : 9999,
                 hostname : '0.0.0.0'
             },
-            rules : [{
-                from : '^/index',
-                to : '/index.html'
-            }],
             server : {
                 options : {
                     middleware : function (connect) {
                         return [
                             lrSnippet,
-                            rewriteRulesSnippet,
                             mountFolder(connect, pathConfig.tmp),
                             mountFolder(connect, pathConfig.app)
                         ];
@@ -68,7 +63,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        open : {
+        open: {
             server : {
                 path : 'http://127.0.0.1:<%= connect.options.port %>',
                 app : 'Google Chrome Canary'
@@ -84,10 +79,12 @@ module.exports = function (grunt) {
                 dest : '<%= paths.dist %>'
             }
         },
-        usemin : {
-            html : ['<%= paths.dist %>/*.html'],
+        usemin: {
+            html : ['<%= paths.dist %>/**/*.html'],
+            css : ['<%= paths.dist %>/stylesheets/**/*.css'],
             options : {
-                dirs : ['<%= paths.dist %>']
+                dirs : ['<%= paths.dist %>'],
+                assetsDirs : ['<%= paths.dist %>']
             }
         },
         htmlmin : {
@@ -95,7 +92,7 @@ module.exports = function (grunt) {
                 files : [{
                     expand : true,
                     cwd : '<%= paths.app %>',
-                    src : ['*.html'],
+                    src : ['**/*.html'],
                     dest : '<%= paths.dist %>'
                 }]
             }
@@ -108,7 +105,7 @@ module.exports = function (grunt) {
                     cwd : '<%= paths.app %>',
                     dest : '<%= paths.dist %>',
                     src : [
-                        'images/**/*.{webp,gif,png,jpg,jpeg}'
+                        'images/**/*.{webp,gif,png,jpg,jpeg,ttf,otf}'
                     ]
                 }]
             }
@@ -116,9 +113,8 @@ module.exports = function (grunt) {
         compass : {
             options : {
                 sassDir : '<%= paths.app %>/compass/sass',
-                cssDir : '<%= paths.tmp %>/stylesheets',
                 imagesDir : '<%= paths.app %>/compass/images',
-                fontsDir : '<%= paths.app %>/compass/fonts',
+                fontsDir : '<%= paths.app %>/images/fonts',
                 relativeAssets : true
             },
             dist : {
@@ -126,23 +122,25 @@ module.exports = function (grunt) {
                     cssDir : '<%= paths.dist %>/stylesheets',
                     generatedImagesDir : '<%= paths.dist %>/images',
                     outputStyle : 'compressed',
-                    relativeAssets : false
+                    environment : 'production'
                 }
             },
             server : {
                 options : {
                     cssDir : '<%= paths.tmp %>/stylesheets',
                     generatedImagesDir : '<%= paths.tmp %>/images',
-                    debugInfo : true
+                    debugInfo : true,
+                    environment : 'development'
                 }
             }
         },
-        rev : {
-            dist : {
-                files : {
-                    src : [
+        rev: {
+            dist: {
+                files: {
+                    src: [
                         '<%= paths.dist %>/javascripts/**/*.js',
-                        '<%= paths.dist %>/stylesheets/**/*.css'
+                        '<%= paths.dist %>/stylesheets/**/*.css',
+                        '<%= paths.dist %>/images/**/*.{webp,gif,png,jpg,jpeg,ttf,otf}'
                     ]
                 }
             }
@@ -172,7 +170,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        concurrent : {
+        concurrent: {
             dist : ['copy:dist', 'compass:dist']
         },
         jshint : {
@@ -227,7 +225,6 @@ module.exports = function (grunt) {
         'compass:server',
         'connect:server',
         'karma:server',
-        'configureRewriteRules',
         'open',
         'watch'
     ]);
