@@ -251,4 +251,22 @@ module.exports = function (grunt) {
         'rev',
         'usemin'
     ]);
+
+    grunt.registerTask(['bump'], [
+        'bump-only:patch',
+        'changelog',
+        'bump-commit'
+    ]);
+
+    grunt.registerTask(['bump:minor'], [
+        'bump-only:minor',
+        'changelog',
+        'bump-commit'
+    ]);
+
+    grunt.registerTask(['bump:major'], [
+        'bump-only:major',
+        'changelog',
+        'bump-commit'
+    ]);
 };
