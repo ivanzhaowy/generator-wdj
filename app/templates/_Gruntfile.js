@@ -252,19 +252,19 @@ module.exports = function (grunt) {
         'usemin'
     ]);
 
-    grunt.registerTask(['bump'], [
+    grunt.registerTask(['update'], [
         'bump-only:patch',
         'changelog',
         'bump-commit'
     ]);
 
-    grunt.registerTask(['bump:minor'], [
+    grunt.registerTask(['update:minor'], [
         'bump-only:minor',
         'changelog',
         'bump-commit'
     ]);
 
-    grunt.registerTask(['bump:major'], [
+    grunt.registerTask(['update:major'], [
         'bump-only:major',
         'changelog',
         'bump-commit'

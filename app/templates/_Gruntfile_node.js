@@ -8,7 +8,8 @@ module.exports = function (grunt) {
     var pathConfig = {
         app : 'app',
         dist : 'dist',
-        tmp : '.tmp'
+        tmp : '.tmp',
+        test : 'test'
     };
 
     grunt.initConfig({
@@ -78,19 +79,19 @@ module.exports = function (grunt) {
         'jshint:test'
     ]);
 
-    grunt.registerTask(['bump'], [
+    grunt.registerTask(['update'], [
         'bump-only:patch',
         'changelog',
         'bump-commit'
     ]);
 
-    grunt.registerTask(['bump:minor'], [
+    grunt.registerTask(['update:minor'], [
         'bump-only:minor',
         'changelog',
         'bump-commit'
     ]);
 
-    grunt.registerTask(['bump:major'], [
+    grunt.registerTask(['update:major'], [
         'bump-only:major',
         'changelog',
         'bump-commit'
