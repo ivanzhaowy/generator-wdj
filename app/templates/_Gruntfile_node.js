@@ -15,6 +15,16 @@ module.exports = function (grunt) {
     grunt.initConfig({
         paths : pathConfig,
         watch : {
+            test : {
+                files : [
+                    '**/*.js',
+                    '!node_modules/**/*.*',
+                ],
+                tasks : ['jshint:test', 'mochaTest'],
+                options : {
+                    spawn : false
+                }
+            }
         },
         open: {
             server : {
@@ -68,11 +78,21 @@ module.exports = function (grunt) {
                     'stack-trace-limit' : 4
                 }
             }
+        },
+        jshint : {
+            options : {
+                ignores : ['**/node_modules/**/*.js']
+            },
+            test : ['**/*.js']
         }
     });
 
     grunt.registerTask('server', [
         'concurrent:server'
+    ]);
+
+    grunt.registerTask('server:test', [
+        'watch'
     ]);
 
     grunt.registerTask('test', [
