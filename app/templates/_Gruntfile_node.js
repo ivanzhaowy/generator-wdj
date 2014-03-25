@@ -81,6 +81,7 @@ module.exports = function (grunt) {
         },
         jshint : {
             options : {
+                jshintrc : '.jshintrc',
                 ignores : ['**/node_modules/**/*.js']
             },
             test : ['**/*.js']
@@ -95,8 +96,9 @@ module.exports = function (grunt) {
         'watch'
     ]);
 
-    grunt.registerTask('test', [
-        'jshint:test'
+    grunt.registerTask('test:travis', [
+        'jshint:test',
+        'mochaTest:test'
     ]);
 
     grunt.registerTask(['update'], [

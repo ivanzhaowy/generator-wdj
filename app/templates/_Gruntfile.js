@@ -174,6 +174,9 @@ module.exports = function (grunt) {
             dist : ['copy:dist', 'compass:dist']
         },
         jshint : {
+            options : {
+                jshintrc : '.jshintrc'
+            },
             test : ['<%= paths.app %>/javascripts/**/*.js']
         },
         karma : {
