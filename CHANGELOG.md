@@ -1,3 +1,13 @@
+<a name="0.2.3"></a>
+### 0.2.3 (2014-03-25)
+
+
+#### Features
+
+* Add dependency version tracking. ([f985566b](http://github.com/ivanzhaowy/generator-wdj/commit/f985566b90b959c1fa35fd3f743449e38e1338a6))
+* Update dependency version. ([0d00dc8e](http://github.com/ivanzhaowy/generator-wdj/commit/0d00dc8e6a51ce3cd43b7040e5304a596f36e4be))
+
+
 <a name="v0.2.2"></a>
 ### v0.2.2 (2014-03-25)
 

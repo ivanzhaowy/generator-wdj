@@ -29,6 +29,8 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('release:patch', [
-        'bump:patch'
+        'bump-only:patch',
+        'changelog',
+        'bump-commit'
     ]);
 };
