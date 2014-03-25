@@ -1,4 +1,6 @@
-# generator-wdj-app [![Build Status](https://secure.travis-ci.org/ivanzhaowy/generator-wdj-app.png?branch=master)](https://travis-ci.org/ivanzhaowy/generator-wdj-app)
+# generator-wdj-app  
+[![NPM version](https://badge.fury.io/js/generator-wdj.png)](http://badge.fury.io/js/generator-wdj)  
+[![Dependencies version](https://david-dm.org/ivanzhaowy/generator-wdj.png)](http://david-dm.org/ivanzhaowy/generator-wdj)
 
 A generator for [Yeoman](http://yeoman.io).
 
