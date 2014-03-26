@@ -1,3 +1,12 @@
+<a name="0.2.4"></a>
+### 0.2.4 (2014-03-27)
+
+
+#### Bug Fixes
+
+* Fix project selection bug. ([9c108c45](http://github.com/ivanzhaowy/generator-wdj/commit/9c108c45b6a3e1e907db4e8a130750302c9cc773))
+
+
 <a name="0.2.3"></a>
 ### 0.2.3 (2014-03-25)
 

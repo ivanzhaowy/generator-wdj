@@ -1,6 +1,6 @@
 {
     "name" : "generator-wdj",
-    "version" : "0.2.3",
+    "version" : "0.2.4",
     "description" : "A generator for Yeoman serve the people in Wandou Labs",
     "homepage" : "https://github.com/ivanzhaowy/generator-wdj",
     "bugs" : "https://github.com/ivanzhaowy/generator-wdj-app/issues",
