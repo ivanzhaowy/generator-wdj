@@ -8,7 +8,7 @@ var WdjAppGenerator = module.exports = function WdjAppGenerator (args, options, 
 
     this.on('end', function () {
         this.installDependencies({
-            skipInstall : true
+            skipInstall : false
         });
     });
 
@@ -27,7 +27,7 @@ WdjAppGenerator.prototype.askFor = function askFor() {
         name : 'projectType',
         message : 'Which kind of project are u scaffolding?',
         choices : [{
-            name : 'Typical Front-end project that running in browser. ',
+            name : 'Typical Front-end project that running in browsers. ',
             value : 'browser'
         }, {
             name : 'Node.js project. ',
@@ -43,7 +43,7 @@ WdjAppGenerator.prototype.askFor = function askFor() {
 };
 
 WdjAppGenerator.prototype.app = function app() {
-    if (this.projectType === 'browser') {
+    if (this.projectType !== 'browser') {
         this.copy('_package_node.json', 'package.json');
         this.copy('_Gruntfile_node.js', 'Gruntfile.js');
     } else {
