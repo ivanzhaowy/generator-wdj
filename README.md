@@ -1,4 +1,4 @@
-# generator-wdj-app[![NPM version](https://badge.fury.io/js/generator-wdj.png)](http://badge.fury.io/js/generator-wdj)[![Dependencies version](https://david-dm.org/ivanzhaowy/generator-wdj.png)](http://david-dm.org/ivanzhaowy/generator-wdj)[![Dependencies version](https://david-dm.org/ivanzhaowy/generator-wdj/dev-status.png)](http://david-dm.org/ivanzhaowy/generator-wdj)
+# generator-wdj-app [![NPM version](https://badge.fury.io/js/generator-wdj.png)](http://badge.fury.io/js/generator-wdj) [![Dependencies version](https://david-dm.org/ivanzhaowy/generator-wdj.png)](http://david-dm.org/ivanzhaowy/generator-wdj) [![Dependencies version](https://david-dm.org/ivanzhaowy/generator-wdj/dev-status.png)](http://david-dm.org/ivanzhaowy/generator-wdj)
 
 A generator for [Yeoman](http://yeoman.io).
 
