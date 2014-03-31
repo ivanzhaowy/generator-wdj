@@ -1,3 +1,12 @@
+<a name="0.2.5"></a>
+### 0.2.5 (2014-04-01)
+
+
+#### Features
+
+* Update JSHint config. ([a2358543](http://github.com/ivanzhaowy/generator-wdj/commit/a2358543b0b9faa5ef757f6c3a7041434b009cb9))
+
+
 <a name="0.2.4"></a>
 ### 0.2.4 (2014-03-27)
 
