@@ -248,12 +248,27 @@ module.exports = function (grunt) {
         'karma:travis'
     ]);
 
-    grunt.registerTask('build', [
+    grunt.registerTask('build:staging', [
         'clean:dist',
         'concurrent:dist',
         'useminPrepare',
         'concat',
         'uglify',
+        'cssmin',
+        // 'requirejs:dist', // Uncomment this line if using RequireJS in your project
+        'imagemin',
+        'htmlmin',
+        'rev',
+        'usemin'
+    ]);
+
+    grunt.registerTask('build:production', [
+        'clean:dist',
+        'concurrent:dist',
+        'useminPrepare',
+        'concat',
+        'uglify',
+        'cssmin',
         // 'requirejs:dist', // Uncomment this line if using RequireJS in your project
         'imagemin',
         'htmlmin',
