@@ -1,3 +1,18 @@
+<a name="0.3.0"></a>
+## 0.3.0 (2014-06-12)
+
+
+#### Bug Fixes
+
+* Expose concurrent tasks' log. ([b095056e](http://github.com/ivanzhaowy/generator-wdj/commit/b095056e499d936f1b1a197dc26bd2ebed20f4e1))
+
+
+#### Features
+
+* Add grunt-cdn support. ([57a4480a](http://github.com/ivanzhaowy/generator-wdj/commit/57a4480af44be39f51844905272f5cb434b0f9fb))
+* Update dependencies ([fe0b3529](http://github.com/ivanzhaowy/generator-wdj/commit/fe0b35295d7902cb6130c3a46aa52b56a4cc0372))
+
+
 <a name="0.2.5"></a>
 ### 0.2.5 (2014-04-01)
 
