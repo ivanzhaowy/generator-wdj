@@ -42,7 +42,8 @@
         "karma-requirejs" : "0.2.2",
         "matchdep" : "0.3.0",
         "connect-livereload" : "0.4.0",
-        "time-grunt" : "0.3.2"
+        "time-grunt" : "0.3.2",
+        "grunt-cdn" : "0.5.2"
     },
     "engines" : {
         "node" : ">=0.8.0"
