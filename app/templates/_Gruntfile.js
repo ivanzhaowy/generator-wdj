@@ -122,6 +122,17 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
+            html: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= paths.tmp %>',
+                    dest: '<%= paths.dist %>',
+                    src: [
+                        '**/*.html'
+                    ]
+                }]
+            },
             compass: {
                 files: [{
                     expand: true,
@@ -260,11 +271,97 @@ module.exports = function (grunt) {
         },
         cdn: {
             options: {
-                cdn: 'http://change.this.to.cdn.path',
                 flatten: true
             },
             dist: {
-                src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css'],
+                options: {
+                    cdn: 'http://static.wdjimg.com/xxx',
+                },
+                src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css']
+            },
+            staging: {
+                options: {
+                    cdn: 'https://s3.cn-north-1.amazonaws.com.cn/web-statics-staging/xxx',
+                },
+                src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css']
+            }
+        },
+        aws_s3: {
+            options: {
+                accessKeyId: '',
+                secretAccessKey: '',
+                region: 'cn-north-1',
+                uploadConcurrency: 5,
+                signatureVersion: 'v4'
+            },
+            staging: {
+                options: {
+                    bucket: 'web-statics-staging',
+                    differential: true,
+                    params: {
+                        CacheControl: '31536000'
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'dist',
+                    src: ['**', '!**/*.css', '!**/*.js'],
+                    dest: 'xxx/'
+
+                }, {
+                    expand: true,
+                    cwd: 'gzip',
+                    src: ['**'],
+                    dest: 'xxx/',
+                    params: {
+                        ContentEncoding: 'gzip'
+                    }
+                }]
+            },
+            production: {
+                options: {
+                    bucket: 'web-statics-production',
+                    differential: true,
+                    params: {
+                        CacheControl: '31536000'
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'dist',
+                    src: ['**', '!**/*.css', '!**/*.js'],
+                    dest: 'xxx/'
+                }, {
+                    expand: true,
+                    cwd: 'gzip',
+                    src: ['**'],
+                    dest: 'xxx/',
+                    params: {
+                        ContentEncoding: 'gzip'
+                    }
+                }]
+            }
+        },
+        compress: {
+            js: {
+                options: {
+                    mode: 'gzip'
+                },
+                expand: true,
+                cwd: 'dist/',
+                src: ['**/*.js'],
+                dest: 'gzip/',
+                ext: '.js'
+            },
+            css: {
+                options: {
+                    mode: 'gzip'
+                },
+                expand: true,
+                cwd: 'dist/',
+                src: ['**/*.css'],
+                dest: 'gzip/',
+                ext: '.css'
             }
         }
     });
@@ -299,7 +396,11 @@ module.exports = function (grunt) {
         'copy:compass',
         'imagemin',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'cdn:staging',
+        'compress:js',
+        'compress:css',
+        'aws_s3:staging'
     ]);
 
     grunt.registerTask('build:production', [
@@ -315,7 +416,10 @@ module.exports = function (grunt) {
         'imagemin',
         'usemin',
         'htmlmin',
-        'cdn:dist'
+        'cdn:dist',
+        'compress:js',
+        'compress:css',
+        'aws_s3:production'
     ]);
 
     grunt.registerTask(['update'], [
