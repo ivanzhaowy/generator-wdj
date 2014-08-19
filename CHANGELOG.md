@@ -1,3 +1,12 @@
+<a name="0.3.1"></a>
+### 0.3.1 (2014-08-19)
+
+
+#### Features
+
+* Add S3 upload support ([588a98ae](http://github.com/wandoulabs/generator-wdj/commit/588a98aee01261c24a3befe0b3cd4a756d4f8627))
+
+
 <a name="0.3.0"></a>
 ## 0.3.0 (2014-06-12)
 
