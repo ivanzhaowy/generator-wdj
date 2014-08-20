@@ -343,26 +343,15 @@ module.exports = function (grunt) {
             }
         },
         compress: {
-            js: {
+            gzip: {
                 options: {
                     mode: 'gzip'
                 },
                 expand: true,
                 cwd: 'dist/',
-                src: ['**/*.js'],
-                dest: 'gzip/',
-                ext: '.js'
-            },
-            css: {
-                options: {
-                    mode: 'gzip'
-                },
-                expand: true,
-                cwd: 'dist/',
-                src: ['**/*.css'],
-                dest: 'gzip/',
-                ext: '.css'
-            }
+                src: ['**/*.js', '**/*.css'],
+                dest: 'gzip/'
+
         }
     });
 
@@ -398,8 +387,7 @@ module.exports = function (grunt) {
         'usemin',
         'htmlmin',
         'cdn:staging',
-        'compress:js',
-        'compress:css',
+        'compress:gzip',
         'aws_s3:staging'
     ]);
 
@@ -417,8 +405,7 @@ module.exports = function (grunt) {
         'usemin',
         'htmlmin',
         'cdn:dist',
-        'compress:js',
-        'compress:css',
+        'compress:gzip',
         'aws_s3:production'
     ]);
 
