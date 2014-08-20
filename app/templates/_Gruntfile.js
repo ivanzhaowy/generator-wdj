@@ -304,7 +304,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'dist',
+                    cwd: '<%= paths.dist %>',
                     src: ['**', '!**/*.css', '!**/*.js'],
                     dest: 'xxx/'
 
@@ -328,7 +328,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'dist',
+                    cwd: '<%= paths.dist %>',
                     src: ['**', '!**/*.css', '!**/*.js'],
                     dest: 'xxx/'
                 }, {
@@ -348,7 +348,7 @@ module.exports = function (grunt) {
                     mode: 'gzip'
                 },
                 expand: true,
-                cwd: 'dist/',
+                cwd: '<%= paths.dist %>/',
                 src: ['**/*.js', '**/*.css'],
                 dest: 'gzip/'
 
