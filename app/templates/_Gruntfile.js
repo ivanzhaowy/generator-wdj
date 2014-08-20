@@ -286,7 +286,7 @@ module.exports = function (grunt) {
                 src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css']
             }
         },
-        aws_s3: {
+        'aws_s3': {
             options: {
                 accessKeyId: '',
                 secretAccessKey: '',
