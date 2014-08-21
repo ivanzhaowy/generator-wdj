@@ -1,3 +1,18 @@
+<a name="0.3.2"></a>
+### 0.3.2 (2014-08-21)
+
+
+#### Bug Fixes
+
+* Keep filename when compress resources. ([8a9fcc45](http://github.com/wandoulabs/generator-wdj/commit/8a9fcc4509a6615da8f04235a9b0a014bb5e89e5))
+
+
+#### Features
+
+* Add S3 upload support ([a34b1ce3](http://github.com/wandoulabs/generator-wdj/commit/a34b1ce3597c139a00aeeb8044722f3f5aa22666))
+* Ignore sublime project files by default. ([65783885](http://github.com/wandoulabs/generator-wdj/commit/657838852b3d69a373e6a5084a2aff5572ab5702))
+
+
 <a name="0.3.1"></a>
 ### 0.3.1 (2014-08-19)
 
