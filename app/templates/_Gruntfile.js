@@ -353,7 +353,7 @@ module.exports = function (grunt) {
                 cwd: '<%= paths.dist %>/',
                 src: ['**/*.js', '**/*.css'],
                 dest: 'gzip/'
-
+            }
         }
     });
 
