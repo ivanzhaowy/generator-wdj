@@ -1,3 +1,12 @@
+<a name="0.3.3"></a>
+### 0.3.3 (2014-09-01)
+
+
+#### Features
+
+* Support progressive JPEG & GIF in imagemin ([c37b795e](http://github.com/wandoulabs/generator-wdj/commit/c37b795e65d7a7a4a0d26b5000a609f2a053914b))
+
+
 <a name="0.3.2"></a>
 ### 0.3.2 (2014-08-21)
 
