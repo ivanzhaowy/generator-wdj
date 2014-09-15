@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         },
         bump : {
             options : {
-                files : ['package.json', '<%= paths.app %>/manifest.json', 'bower.json'],
+                files : ['package.json', 'bower.json'],
                 updateConfigs : [],
                 commit : true,
                 commitMessage : 'Release v%VERSION%',
@@ -88,11 +88,11 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('server', [
+    grunt.registerTask('serve', [
         'concurrent:server'
     ]);
 
-    grunt.registerTask('server:test', [
+    grunt.registerTask('serve:test', [
         'watch'
     ]);
 
