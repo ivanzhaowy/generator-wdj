@@ -1,3 +1,19 @@
+<a name="0.4.0"></a>
+## 0.4.0 (2014-09-15)
+
+
+#### Bug Fixes
+
+* Polish _Gruntfile_node.js ([4be04ad6](http://github.com/wandoulabs/generator-wdj/commit/4be04ad644ff85aa75145505ccee8fbaff191caf))
+* polish .gitignore ([3843ff0d](http://github.com/wandoulabs/generator-wdj/commit/3843ff0df1a3e0a146553fcc3250a6353b592a17))
+
+
+#### Features
+
+* Support Sails project. ([ff35d58b](http://github.com/wandoulabs/generator-wdj/commit/ff35d58b9beda6ff9a584916acbf6893813b7c23))
+* Add mobile first related mate by default. ([1e492399](http://github.com/wandoulabs/generator-wdj/commit/1e492399a4831b3f154f7afc2f8cd8bdd57040de))
+
+
 <a name="0.3.3"></a>
 ### 0.3.3 (2014-09-01)
 
