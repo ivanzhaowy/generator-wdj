@@ -1,3 +1,13 @@
+<a name="0.4.1"></a>
+### 0.4.1 (2014-09-15)
+
+
+#### Bug Fixes
+
+* Add build config for Sails project. ([54fd1e38](http://github.com/wandoulabs/generator-wdj/commit/54fd1e3852ac358f51fb228ce612ea7f3075b0a0))
+* Remove temp files in Sails template. ([19e395cc](http://github.com/wandoulabs/generator-wdj/commit/19e395cca6ce2b5c0b4904062c87e5a80871d2bb))
+
+
 <a name="0.4.0"></a>
 ## 0.4.0 (2014-09-15)
 
