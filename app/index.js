@@ -32,6 +32,9 @@ WdjAppGenerator.prototype.askFor = function askFor() {
         }, {
             name : 'Node.js project. ',
             value : 'node'
+        }, {
+            name : 'Sails project. ',
+            value : 'sails'
         }]
     }];
 
@@ -43,10 +46,8 @@ WdjAppGenerator.prototype.askFor = function askFor() {
 };
 
 WdjAppGenerator.prototype.app = function app() {
-    if (this.projectType !== 'browser') {
-        this.copy('_package_node.json', 'package.json');
-        this.copy('_Gruntfile_node.js', 'Gruntfile.js');
-    } else {
+    switch (this.projectType) {
+    case 'browser':
         this.mkdir('app');
 
         // Make bower components dir
@@ -77,6 +78,15 @@ WdjAppGenerator.prototype.app = function app() {
 
         this.copy('_karma.conf.js', 'test/karma.conf.js');
         this.copy('_test-main.js', 'test/test-main.js');
+    break;
+    case 'node':
+        this.copy('_package_node.json', 'package.json');
+        this.copy('_Gruntfile_node.js', 'Gruntfile.js');
+    break;
+    case 'sails':
+        this.copy('_bower.json', 'bower.json');
+        this.directory('sails', './');
+    break;
     }
 };
 
