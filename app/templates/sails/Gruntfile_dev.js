@@ -85,6 +85,24 @@ module.exports = function (grunt) {
                 ignores : ['**/node_modules/**/*.js']
             },
             test : ['**/*.js']
+        },
+        copy : {
+            production : {
+                files : [{
+                    expand : true,
+                    dest : '<%= paths.dist %>',
+                    src : [
+                        '**/*',
+                        '!.git/*',
+                        '!.editorconfig',
+                        '!.git*',
+                        '!.travis.yml',
+                        '!.jshintrc',
+                        '!Gruntfile.js',
+                        '!*.sublime*'
+                    ]
+                }]
+            }
         }
     });
 
@@ -117,6 +135,16 @@ module.exports = function (grunt) {
         'bump-only:major',
         'changelog',
         'bump-commit'
+    ]);
+
+    grunt.registerTask('build:production', [
+        'clean:dist',
+        'copy:production'
+    ]);
+
+    grunt.registerTask('build:staging', [
+        'clean:dist',
+        'copy:production'
     ]);
 
     grunt.registerTask('default', []);

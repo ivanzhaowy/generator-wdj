@@ -201,11 +201,22 @@ module.exports = function (grunt) {
                     uglify: {
                         toplevel: true,
                         ascii_only: false,
-                        beautify: false
+                        beautify: false,
+                        drop_console: true,
+                        drop_debugger: true,
+                        dead_code: true
                     },
                     preserveLicenseComments: true,
                     useStrict: false,
                     wrap: true
+                }
+            }
+        },
+        uglify: {
+            options: {
+                compress: {
+                    drop_console: true,
+                    drop_debugger: true
                 }
             }
         },
