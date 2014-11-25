@@ -1,0 +1,19 @@
+<html>
+    <meta charset="utf-8">
+    <!-- build:js javascripts/background.js -->
+    <script src="javascripts/main.js"></script>
+    <!-- endbuild -->
+
+    <!--(if target !dist)><!-->
+    <script src="dev/reload.js"></script>
+    <!--<!(endif)-->
+
+    <!--(if target nerver)><!-->
+    <!-- build:js javascripts/content_script.js -->
+    <!-- use to generate content scripts -->
+    <script src="javascripts/main.js"></script>
+    <!-- endbuild -->
+    <!--<!(endif)-->
+    <body>
+    </body>
+</html>

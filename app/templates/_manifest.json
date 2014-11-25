@@ -1,0 +1,24 @@
+{
+    "name": "name",
+    "description": "description",
+    "manifest_version": 2,
+    "version": "0.1",
+    "browser_action": {
+        "default_icon": ""
+    },
+    "homepage_url": "http://www.wandoujia.com",
+    "background": {
+        "page": "background.html"
+    },
+    "icons": {
+    },
+    "permissions": [
+    ],
+    "content_scripts": [{
+        "matches": [],
+        "js": [],
+        "css": [],
+        "run_at": "document_end"
+    }],
+    "web_accessible_resources": []
+}
