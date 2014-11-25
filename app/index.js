@@ -35,6 +35,9 @@ WdjAppGenerator.prototype.askFor = function askFor() {
         }, {
             name : 'Sails project. ',
             value : 'sails'
+        }, {
+            name : 'Chrome Extension. ',
+            value : 'crx'
         }]
     }];
 
@@ -48,6 +51,7 @@ WdjAppGenerator.prototype.askFor = function askFor() {
 WdjAppGenerator.prototype.app = function app() {
     switch (this.projectType) {
     case 'browser':
+    case 'crx':
         this.mkdir('app');
 
         // Make bower components dir
@@ -67,26 +71,34 @@ WdjAppGenerator.prototype.app = function app() {
         this.mkdir('test/specs');
 
         this.copy('bowerrc', '.bowerrc');
-        this.copy('_package.json', 'package.json');
         this.copy('_bower.json', 'bower.json');
-        this.copy('_Gruntfile.js', 'Gruntfile.js');
         this.copy('_README.md', 'README.md');
-
-        this.copy('_index.html', 'app/index.html');
         this.copy('_main.scss', 'app/compass/sass/main.scss');
         this.copy('_main.js', 'app/javascripts/main.js');
-
         this.copy('_karma.conf.js', 'test/karma.conf.js');
         this.copy('_test-main.js', 'test/test-main.js');
-    break;
+
+        if (this.projectType === 'browser') {
+            this.copy('_package.json', 'package.json');
+            this.copy('_Gruntfile.js', 'Gruntfile.js');
+            this.copy('_index.html', 'app/index.html');
+        } else {
+            this.copy('_package_crx.json', 'package.json');
+            this.copy('_Gruntfile_crx.js', 'Gruntfile.js');
+            this.copy('_background.html', 'app/background.html');
+            this.copy('_manifest.json', 'app/manifest.json');
+            this.mkdir('app/dev');
+            this.copy('_reload.js', 'app/dev/reload.js');
+        }
+        break;
     case 'node':
         this.copy('_package_node.json', 'package.json');
         this.copy('_Gruntfile_node.js', 'Gruntfile.js');
-    break;
+        break;
     case 'sails':
         this.copy('_bower.json', 'bower.json');
         this.directory('sails', './');
-    break;
+        break;
     }
 };
 
