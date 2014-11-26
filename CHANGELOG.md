@@ -1,3 +1,12 @@
+<a name="0.4.4"></a>
+### 0.4.4 (2014-11-26)
+
+
+#### Features
+
+* Chrome extension support. ([39ec0483](http://github.com/wandoulabs/generator-wdj/commit/39ec04836e38652a3651c260170f66ee3fc11623))
+
+
 <a name="0.4.3"></a>
 ### 0.4.3 (2014-11-20)
 
