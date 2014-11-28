@@ -72,7 +72,6 @@ WdjAppGenerator.prototype.app = function app() {
 
         this.copy('bowerrc', '.bowerrc');
         this.copy('_bower.json', 'bower.json');
-        this.copy('_README.md', 'README.md');
         this.copy('_main.scss', 'app/compass/sass/main.scss');
         this.copy('_main.js', 'app/javascripts/main.js');
         this.copy('_karma.conf.js', 'test/karma.conf.js');
