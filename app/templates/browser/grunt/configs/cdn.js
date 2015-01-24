@@ -5,13 +5,13 @@ module.exports = function (grunt) {
         },
         dist: {
             options: {
-                cdn: 'http://static.wdjimg.com/xxx',
+                cdn: 'http://static.wdjimg.com/<%= paths.project %>',
             },
             src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css']
         },
         staging: {
             options: {
-                cdn: 'https://s3.cn-north-1.amazonaws.com.cn/web-statics-staging/xxx',
+                cdn: 'https://s3.cn-north-1.amazonaws.com.cn/web-statics-staging/<%= paths.project %>',
             },
             src: ['<%= paths.dist %>/**/*.html', '<%= paths.dist %>/**/*.css']
         }
