@@ -22,14 +22,21 @@ module.exports = function (grunt) {
             files: [{
                 expand: true,
                 cwd: '<%= paths.dist %>',
-                src: ['**', '!**/*.css', '!**/*.js'],
-                dest: 'xxx/'
-
+                src: ['**', '!**/*.css', '!**/*.js', '!**/*.js.map'],
+                dest: '<%= paths.project %>/'
+            }, {
+                expand: true,
+                cwd: '<%= paths.dist %>',
+                src: ['**/*.js.map'],
+                dest: '<%= paths.project %>/',
+                params: {
+                    CacheControl: 'no-cache'
+                }
             }, {
                 expand: true,
                 cwd: 'gzip',
                 src: ['**'],
-                dest: 'xxx/',
+                dest: '<%= paths.project %>/',
                 params: {
                     ContentEncoding: 'gzip'
                 }
@@ -46,13 +53,21 @@ module.exports = function (grunt) {
             files: [{
                 expand: true,
                 cwd: '<%= paths.dist %>',
-                src: ['**', '!**/*.css', '!**/*.js'],
-                dest: 'xxx/'
+                src: ['**', '!**/*.css', '!**/*.js', '!**/*.js.map'],
+                dest: '<%= paths.project %>/'
+            }, {
+                expand: true,
+                cwd: '<%= paths.dist %>',
+                src: ['**/*.js.map'],
+                dest: '<%= paths.project %>/',
+                params: {
+                    CacheControl: 'no-cache'
+                }
             }, {
                 expand: true,
                 cwd: 'gzip',
                 src: ['**'],
-                dest: 'xxx/',
+                dest: '<%= paths.project %>/',
                 params: {
                     ContentEncoding: 'gzip'
                 }
