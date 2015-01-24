@@ -40,7 +40,8 @@ module.exports = function (grunt) {
             dist: 'dist',
             tmp: '.tmp',
             test: 'test',
-            port: 9999
+            port: 9999,
+            project: 'xxx'
         }
     });
 
