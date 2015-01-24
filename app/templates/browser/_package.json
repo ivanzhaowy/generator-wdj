@@ -44,7 +44,8 @@
         "connect-livereload" : "0.5.2",
         "time-grunt" : "1.0.0",
         "grunt-cdn" : "0.6.5",
-        "grunt-aws-s3" : "0.11.0"
+        "grunt-aws-s3" : "0.11.0",
+        "include-all" : "0.1.6"
     },
     "engines" : {
         "node" : ">=0.8.0"
