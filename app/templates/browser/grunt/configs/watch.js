@@ -20,12 +20,14 @@ module.exports = function (grunt) {
                 '<%= paths.tmp %>/images/**/*'
             ],
             options: {
-                livereload: true,
-                spawn: false
+                livereload: true
             }
         },
-        configFiles: {
-            files: ['Gruntfile.js'],
+        gruntfile: {
+            files: [
+                'Gruntfile.js',
+                'grunt/**/*.js'
+            ],
             options: {
                 reload: true
             }
