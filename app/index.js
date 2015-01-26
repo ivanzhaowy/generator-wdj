@@ -72,16 +72,16 @@ WdjAppGenerator.prototype.app = function app() {
 
         this.copy('bowerrc', '.bowerrc');
         this.copy('_bower.json', 'bower.json');
-        this.copy('_README.md', 'README.md');
         this.copy('_main.scss', 'app/compass/sass/main.scss');
         this.copy('_main.js', 'app/javascripts/main.js');
         this.copy('_karma.conf.js', 'test/karma.conf.js');
         this.copy('_test-main.js', 'test/test-main.js');
 
         if (this.projectType === 'browser') {
-            this.copy('_package.json', 'package.json');
-            this.copy('_Gruntfile.js', 'Gruntfile.js');
-            this.copy('_index.html', 'app/index.html');
+            this.copy('browser/_package.json', 'package.json');
+            this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
+            this.copy('browser/_index.html', 'app/index.html');
+            this.directory('browser/grunt', 'grunt');
         } else {
             this.copy('_package_crx.json', 'package.json');
             this.copy('_Gruntfile_crx.js', 'Gruntfile.js');
