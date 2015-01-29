@@ -1,21 +1,23 @@
 'use strict';
+
 var util = require('util');
 var path = require('path');
+var _ = require('lodash');
 var yeoman = require('yeoman-generator');
 
-function merge (source, newPackageJsons) {
-    if (!(newPackageJsons instanceof Array)) {
-        newPackageJsons = [newPackageJsons];
+var merge = function (obj, sources) {
+    if (!(sources instanceof Array)) {
+        sources = [sources];
     }
 
-    newPackageJsons.forEach(function (packageJson) {
+    sources.forEach(function (source) {
         var key;
         var deeperKey;
-        for (key in packageJson) {
-            if (packageJson.hasOwnProperty(key)) {
-                for (deeperKey in packageJson[key]) {
-                    if (packageJson[key].hasOwnProperty(deeperKey)) {
-                        source[key][deeperKey] = packageJson[key][deeperKey];
+        for (key in source) {
+            if (source.hasOwnProperty(key)) {
+                for (deeperKey in source[key]) {
+                    if (source[key].hasOwnProperty(deeperKey)) {
+                        obj[key][deeperKey] = source[key][deeperKey];
                     }
                 }
             }
@@ -50,9 +52,9 @@ WdjAppGenerator.prototype.askFor = function askFor() {
     var prompts = [{
         type : 'list',
         name : 'projectType',
-        message : 'Which kind of project are u scaffolding?',
+        message : 'Which kind of project are u scaffolding? ',
         choices : [{
-            name : 'Typical Front-end project that running in browsers. ',
+            name : 'Browser-based project. ',
             value : 'browser'
         }, {
             name : 'Node.js project. ',
@@ -60,29 +62,47 @@ WdjAppGenerator.prototype.askFor = function askFor() {
         }, {
             name : 'Sails project. ',
             value : 'sails'
+        }]
+    }];
+
+    var promptsSubType = [{
+        type : 'list',
+        name : 'projectSubType',
+        message : 'It\'s a ...',
+        choices : [{
+            name : 'Typical browser-based project. ',
+            value : 'typical'
         }, {
-            name : 'Chrome Extension. ',
+            name : 'Chrome extension project. ',
             value : 'crx'
         }, {
             name : 'Polymer project. ',
-            value: 'polymer'
+            value : 'polymer'
         }]
     }];
 
     this.prompt(prompts, function (props) {
         this.projectType = props.projectType;
 
-        cb();
+        if (props.projectType === 'browser') {
+            this.prompt(promptsSubType, function (props) {
+                this.projectSubType = props.projectSubType;
+                cb();
+            }.bind(this));
+        } else {
+            cb();
+        }
     }.bind(this));
 };
 
 WdjAppGenerator.prototype.app = function app() {
-    var packageJson = this.src.readJSON('_package_base.json');
+    var packageJson = this.src.readJSON('_package.json');
+    var bowerJson = this.src.readJSON('_bower.json');
 
     switch (this.projectType) {
     case 'browser':
-    case 'crx':
-    case 'polymer':
+        var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
+
         this.mkdir('app');
 
         // Make bower components dir
@@ -104,42 +124,51 @@ WdjAppGenerator.prototype.app = function app() {
 
         // Copy public resources
         this.copy('bowerrc', '.bowerrc');
-        this.copy('_bower.json', 'bower.json');
+
         this.copy('browser/_main.scss', 'app/compass/sass/main.scss');
         this.copy('browser/_main.js', 'app/javascripts/main.js');
         this.copy('browser/_karma.conf.js', 'test/karma.conf.js');
         this.copy('browser/_test-main.js', 'test/test-main.js');
+        this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
+        this.directory('browser/grunt', 'grunt');
 
-        if (this.projectType === 'browser') {
+        switch (this.projectSubType) {
+        case 'typical':
             // Genertate `package.json`
-            var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
             var packageJsonBrowserTypical = this.src.readJSON('browser/typical/_package.json');
             merge(packageJson, [packageJsonBrowserBase, packageJsonBrowserTypical]);
 
-            this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
-            this.copy('browser/_index.html', 'app/index.html');
-            this.directory('browser/grunt', 'grunt');
-
-        } else {
+            this.copy('browser/typical/_index.html', 'app/index.html');
+            this.directory('browser/typical/grunt', 'grunt');
+            break;
+        case 'crx':
             // Genertate `package.json`
-            var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
             var packageJsonCrx = this.src.readJSON('browser/crx/_package.json');
             merge(packageJson, [packageJsonBrowserBase, packageJsonCrx]);
 
-            this.copy('_Gruntfile_crx.js', 'Gruntfile.js');
             this.copy('browser/crx/_background.html', 'app/background.html');
             this.copy('browser/crx/_manifest.json', 'app/manifest.json');
             this.mkdir('app/dev');
-
             this.copy('browser/crx/_reload.js', 'app/dev/reload.js');
-        } else if (this.projectType === 'polymer') {
-            this.copy('polymer/_package_polymer.json', 'package.json');
-            this.copy('polymer/_bower_polymer.json', 'bower.json');
-            this.copy('polymer/_index_polymer.html', 'app/index.html');
-            this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
-            this.directory('polymer/elements', 'app/elements');
-            this.directory('browser/grunt', 'grunt');
-            this.directory('polymer/grunt', 'grunt');
+
+            this.directory('browser/crx/grunt', 'grunt');
+            break;
+        case 'polymer':
+            // Genertate `package.json`
+            var packageJsonPolymer = this.src.readJSON('browser/polymer/_package.json');
+            merge(packageJson, [packageJsonBrowserBase, packageJsonPolymer]);
+
+            // Generate `bower.json`
+            var bowerJsonPolymer = this.src.readJSON('browser/polymer/_bower.json');
+            merge(bowerJson, [bowerJsonPolymer]);
+
+            this.copy('browser/polymer/_index.html', 'app/index.html');
+            this.mkdir('app/elements');
+            this.copy('browser/polymer/elements/_elements.html', 'app/elements/elements.html');
+
+            this.directory('browser/typical/grunt', 'grunt');
+            this.directory('browser/polymer/grunt', 'grunt');
+            break;
         }
         break;
     case 'node':
@@ -156,6 +185,7 @@ WdjAppGenerator.prototype.app = function app() {
         break;
     }
 
+    this.dest.write('bower.json', JSON.stringify(bowerJson, null, 4));
     this.dest.write('package.json', JSON.stringify(packageJson, null, 4));
 };
 

@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
     if (grunt.config.data.paths.project === 'xxx') {
-        grunt.fatal('Fatal Error: Project name has not been set correctly! ');
+        grunt.fatal('Project name has not been set correctly! ');
     }
 
     grunt.config.set('aws_s3', {
