@@ -7,9 +7,10 @@ module.exports = function (grunt) {
                 cwd: '<%= paths.app %>',
                 dest: '<%= paths.dist %>',
                 src: [
-                    '**/*.html',
+                    '*.html',
                     'elements/**',
-                    'components/**',
+                    'components/polymer/**',
+                    'components/webcomponentsjs/**',
                     '!compass/**/*.html',
                     'images/**/*.{webp,gif,png,jpg,jpeg,ttf,otf,svg}'
                 ]
