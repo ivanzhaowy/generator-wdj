@@ -4,7 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 
 function merge (source, newDependencies) {
-    if (!newDependencies instanceof Array) {
+    if (!(newDependencies instanceof Array)) {
         newDependencies = [newDependencies];
     }
 
@@ -64,6 +64,8 @@ WdjAppGenerator.prototype.askFor = function askFor() {
 };
 
 WdjAppGenerator.prototype.app = function app() {
+    var packageJson = this.src.readJSON('_package_base.json');
+
     switch (this.projectType) {
     case 'browser':
     case 'crx':
@@ -89,34 +91,38 @@ WdjAppGenerator.prototype.app = function app() {
         // Copy public resources
         this.copy('bowerrc', '.bowerrc');
         this.copy('_bower.json', 'bower.json');
-        this.copy('_main.scss', 'app/compass/sass/main.scss');
-        this.copy('_main.js', 'app/javascripts/main.js');
-        this.copy('_karma.conf.js', 'test/karma.conf.js');
-        this.copy('_test-main.js', 'test/test-main.js');
+        this.copy('browser/_main.scss', 'app/compass/sass/main.scss');
+        this.copy('browser/_main.js', 'app/javascripts/main.js');
+        this.copy('browser/_karma.conf.js', 'test/karma.conf.js');
+        this.copy('browser/_test-main.js', 'test/test-main.js');
 
         if (this.projectType === 'browser') {
             // Genertate `package.json`
-            var packageJson = this.src.readJSON('_package_base.json');
             var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
             var packageJsonBrowserTypical = this.src.readJSON('browser/typical/_package.json');
-
             merge(packageJson, [packageJsonBrowserBase, packageJsonBrowserTypical]);
-
-            this.dest.write('package.json', JSON.stringify(packageJson, null, 4));
 
             this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
             this.copy('browser/_index.html', 'app/index.html');
             this.directory('browser/grunt', 'grunt');
         } else {
-            this.copy('_package_crx.json', 'package.json');
+            // Genertate `package.json`
+            var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
+            var packageJsonCrx = this.src.readJSON('browser/crx/_package.json');
+            merge(packageJson, [packageJsonBrowserBase, packageJsonCrx]);
+
             this.copy('_Gruntfile_crx.js', 'Gruntfile.js');
-            this.copy('_background.html', 'app/background.html');
-            this.copy('_manifest.json', 'app/manifest.json');
+            this.copy('browser/crx/_background.html', 'app/background.html');
+            this.copy('browser/crx/_manifest.json', 'app/manifest.json');
             this.mkdir('app/dev');
-            this.copy('_reload.js', 'app/dev/reload.js');
+            this.copy('browser/crx/_reload.js', 'app/dev/reload.js');
         }
         break;
     case 'node':
+        // Genertate `package.json`
+        var packageJsonNode = this.src.readJSON('_package_node.json');
+        merge(packageJson, packageJsonNode);
+
         this.copy('_package_node.json', 'package.json');
         this.copy('_Gruntfile_node.js', 'Gruntfile.js');
         break;
@@ -125,6 +131,8 @@ WdjAppGenerator.prototype.app = function app() {
         this.directory('sails', './');
         break;
     }
+
+    this.dest.write('package.json', JSON.stringify(packageJson, null, 4));
 };
 
 WdjAppGenerator.prototype.projectfiles = function projectfiles() {
