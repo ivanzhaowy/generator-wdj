@@ -3,26 +3,23 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-function merge (source, newDependencies) {
-    if (!(newDependencies instanceof Array)) {
-        newDependencies = [newDependencies];
+function merge (source, newPackageJsons) {
+    if (!(newPackageJsons instanceof Array)) {
+        newPackageJsons = [newPackageJsons];
     }
 
-    newDependencies.forEach(function (dependencies) {
+    newPackageJsons.forEach(function (packageJson) {
         var key;
-        for (key in dependencies.devDependencies) {
-            if (dependencies.devDependencies.hasOwnProperty(key)) {
-                source.devDependencies[key] = dependencies.devDependencies[key];
+        var deeperKey;
+        for (key in packageJson) {
+            if (packageJson.hasOwnProperty(key)) {
+                for (deeperKey in packageJson[key]) {
+                    if (packageJson[key].hasOwnProperty(deeperKey)) {
+                        source[key][deeperKey] = packageJson[key][deeperKey];
+                    }
+                }
             }
         }
-
-        for (key in dependencies.dependencies) {
-            if (dependencies.dependencies.hasOwnProperty(key)) {
-                source.dependencies[key] = dependencies.dependencies[key];
-            }
-        }
-
-        // TODO: Deep copy and merge more keys if necessary
     });
 }
 
