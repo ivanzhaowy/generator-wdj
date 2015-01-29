@@ -6,4 +6,10 @@ module.exports = function (grunt) {
         'open',
         'watch'
     ]);
+
+    grunt.registerTask('serve:dist', [
+        'build:staging',
+        'open',
+        'connect:dist'
+    ]);
 };
