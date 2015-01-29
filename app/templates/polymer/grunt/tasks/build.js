@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
     grunt.registerTask('build:staging', [
         'clean:dist',
+        'vulcanize',
         'concurrent:dist',
         'useminPrepare',
         'concat',
@@ -10,7 +11,6 @@ module.exports = function (grunt) {
         'rev',
         'copy:compass',
         'imagemin',
-        'vulcanize',
         'usemin',
         'htmlmin',
         'cdn:staging',
@@ -20,6 +20,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build:production', [
         'clean:dist',
+        'vulcanize',
         'concurrent:dist',
         'useminPrepare',
         'concat',

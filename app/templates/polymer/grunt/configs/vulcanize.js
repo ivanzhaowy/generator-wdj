@@ -5,8 +5,8 @@ module.exports = function (grunt) {
                 strip: true
             },
             files: {
-                '<%= paths.dist %>/elements/elements.vulcanized.html': [
-                '<%= paths.dist %>/elements/elements.html'
+                '<%= paths.app %>/elements/elements.vulcanized.html': [
+                '<%= paths.app %>/elements/elements.html'
                 ]
             }
         }

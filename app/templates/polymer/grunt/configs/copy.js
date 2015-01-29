@@ -8,9 +8,10 @@ module.exports = function (grunt) {
                 dest: '<%= paths.dist %>',
                 src: [
                     '*.html',
-                    'elements/**',
-                    'components/polymer/**',
-                    'components/webcomponentsjs/**',
+                    'elements/elements.vulcanized.html',
+                    'components/polymer/polymer.js',
+                    'components/polymer/polymer.html',
+                    'components/webcomponentsjs/webcomponents.js',
                     '!compass/**/*.html',
                     'images/**/*.{webp,gif,png,jpg,jpeg,ttf,otf,svg}'
                 ]
