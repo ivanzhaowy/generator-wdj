@@ -102,8 +102,8 @@ WdjAppGenerator.prototype.app = function app() {
         } else if (this.projectType === 'polymer') {
             this.copy('polymer/_package_polymer.json', 'package.json');
             this.copy('polymer/_bower_polymer.json', 'bower.json');
-            this.copy('polymer/_Gruntfile_polymer.js', 'Gruntfile.js');
             this.copy('polymer/_index_polymer.html', 'app/index.html');
+            this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
             this.directory('polymer/elements', 'app/elements');
             this.directory('browser/grunt', 'grunt');
             this.directory('polymer/grunt', 'grunt');
