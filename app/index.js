@@ -15,6 +15,14 @@ function merge (source, newDependencies) {
                 source.devDependencies[key] = dependencies.devDependencies[key];
             }
         }
+
+        for (key in dependencies.dependencies) {
+            if (dependencies.dependencies.hasOwnProperty(key)) {
+                source.dependencies[key] = dependencies.dependencies[key];
+            }
+        }
+
+        // TODO: Deep copy and merge more keys if necessary
     });
 }
 
