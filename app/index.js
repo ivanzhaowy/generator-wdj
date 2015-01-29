@@ -3,6 +3,21 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
+function merge (source, newDependencies) {
+    if (!newDependencies instanceof Array) {
+        newDependencies = [newDependencies];
+    }
+
+    newDependencies.forEach(function (dependencies) {
+        var key;
+        for (key in dependencies.devDependencies) {
+            if (dependencies.devDependencies.hasOwnProperty(key)) {
+                source.devDependencies[key] = dependencies.devDependencies[key];
+            }
+        }
+    });
+}
+
 var WdjAppGenerator = module.exports = function WdjAppGenerator (args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
 
@@ -68,8 +83,10 @@ WdjAppGenerator.prototype.app = function app() {
         this.mkdir('app/compass/sass');
         this.mkdir('app/compass/images');
 
+        // Make test dir
         this.mkdir('test/specs');
 
+        // Copy public resources
         this.copy('bowerrc', '.bowerrc');
         this.copy('_bower.json', 'bower.json');
         this.copy('_main.scss', 'app/compass/sass/main.scss');
@@ -78,7 +95,15 @@ WdjAppGenerator.prototype.app = function app() {
         this.copy('_test-main.js', 'test/test-main.js');
 
         if (this.projectType === 'browser') {
-            this.copy('browser/_package.json', 'package.json');
+            // Genertate `package.json`
+            var packageJson = this.src.readJSON('_package_base.json');
+            var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
+            var packageJsonBrowserTypical = this.src.readJSON('browser/typical/_package.json');
+
+            merge(packageJson, [packageJsonBrowserBase, packageJsonBrowserTypical]);
+
+            this.dest.write('package.json', JSON.stringify(packageJson, null, 4));
+
             this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
             this.copy('browser/_index.html', 'app/index.html');
             this.directory('browser/grunt', 'grunt');
