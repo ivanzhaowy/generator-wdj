@@ -24,11 +24,14 @@ function merge (source, newPackageJsons) {
 }
 
 var WdjAppGenerator = module.exports = function WdjAppGenerator (args, options, config) {
+    this.projectName = args[0];
+
     yeoman.generators.Base.apply(this, arguments);
 
     this.on('end', function () {
         this.installDependencies({
-            skipInstall : false
+            skipInstall: options['skip-install'],
+            skipMessage: options['skip-install-message']
         });
     });
 
@@ -40,7 +43,9 @@ util.inherits(WdjAppGenerator, yeoman.generators.Base);
 WdjAppGenerator.prototype.askFor = function askFor() {
     var cb = this.async();
 
-    console.log(this.yeoman);
+    if (!this.options['skip-welcome-message']) {
+        console.log(this.yeoman);
+    }
 
     var prompts = [{
         type : 'list',
@@ -58,6 +63,9 @@ WdjAppGenerator.prototype.askFor = function askFor() {
         }, {
             name : 'Chrome Extension. ',
             value : 'crx'
+        }, {
+            name : 'Polymer project. ',
+            value: 'polymer'
         }]
     }];
 
@@ -74,6 +82,7 @@ WdjAppGenerator.prototype.app = function app() {
     switch (this.projectType) {
     case 'browser':
     case 'crx':
+    case 'polymer':
         this.mkdir('app');
 
         // Make bower components dir
@@ -110,6 +119,7 @@ WdjAppGenerator.prototype.app = function app() {
             this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
             this.copy('browser/_index.html', 'app/index.html');
             this.directory('browser/grunt', 'grunt');
+
         } else {
             // Genertate `package.json`
             var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
@@ -120,7 +130,16 @@ WdjAppGenerator.prototype.app = function app() {
             this.copy('browser/crx/_background.html', 'app/background.html');
             this.copy('browser/crx/_manifest.json', 'app/manifest.json');
             this.mkdir('app/dev');
+
             this.copy('browser/crx/_reload.js', 'app/dev/reload.js');
+        } else if (this.projectType === 'polymer') {
+            this.copy('polymer/_package_polymer.json', 'package.json');
+            this.copy('polymer/_bower_polymer.json', 'bower.json');
+            this.copy('polymer/_index_polymer.html', 'app/index.html');
+            this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
+            this.directory('polymer/elements', 'app/elements');
+            this.directory('browser/grunt', 'grunt');
+            this.directory('polymer/grunt', 'grunt');
         }
         break;
     case 'node':
