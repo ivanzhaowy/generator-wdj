@@ -9,8 +9,6 @@ module.exports = function (grunt) {
                 src: [
                     '*.html',
                     'elements/elements.vulcanized.html',
-                    'components/polymer/polymer.js',
-                    'components/polymer/polymer.html',
                     'components/webcomponentsjs/webcomponents.js',
                     '!compass/**/*.html',
                     'images/**/*.{webp,gif,png,jpg,jpeg,ttf,otf,svg}'
