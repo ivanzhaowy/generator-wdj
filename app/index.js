@@ -2,7 +2,6 @@
 
 var util = require('util');
 var path = require('path');
-var _ = require('lodash');
 var yeoman = require('yeoman-generator');
 
 var merge = function (obj, sources) {
