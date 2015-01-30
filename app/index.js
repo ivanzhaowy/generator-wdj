@@ -16,6 +16,7 @@ var merge = function (obj, sources) {
             if (source.hasOwnProperty(key)) {
                 for (deeperKey in source[key]) {
                     if (source[key].hasOwnProperty(deeperKey)) {
+                        obj[key] = obj[key] || {};
                         obj[key][deeperKey] = source[key][deeperKey];
                     }
                 }
