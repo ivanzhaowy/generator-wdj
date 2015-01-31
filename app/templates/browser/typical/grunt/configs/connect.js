@@ -5,7 +5,6 @@ var mountFolder = function (connect, dir) {
 };
 
 module.exports = function (grunt) {
-
     var pathConfig = grunt.config.data.paths;
 
     grunt.config.set('connect', {

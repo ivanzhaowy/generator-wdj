@@ -1,0 +1,5 @@
+{
+    "devDependencies" : {
+        "grunt-crx": "1.0.2"
+    }
+}

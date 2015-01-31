@@ -13,7 +13,6 @@ var reload = function () {
     };
 };
 
-
 (function() {
     var xhr = new XMLHttpRequest;
     xhr.open('GET', 'dev/reload.html');
@@ -24,5 +23,3 @@ var reload = function () {
         return setInterval(reload, 1000);
     };
 }());
-
-

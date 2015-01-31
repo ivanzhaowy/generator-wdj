@@ -1,6 +1,4 @@
 {
-    "name" : "package",
-    "version" : "0.0.0",
     "dependencies" : {
         "polymer": "0.5.1",
         "app-router": "2.3.2",

@@ -8,8 +8,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('serve:dist', [
-        'build:staging',
-        'open',
-        'connect:dist'
+        'connect:dist',
+        'open'
     ]);
 };
