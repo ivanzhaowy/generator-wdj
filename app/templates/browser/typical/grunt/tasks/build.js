@@ -4,13 +4,12 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'useminPrepare',
         'concat',
+        'cssmin',
         'uglify',
-        // 'cssmin', // Uncomment this line if using none-sass style
-        // 'requirejs:dist', // Uncomment this line if using RequireJS in your project
-        'rev',
+        'filerev',
+        'usemin',
         'copy:compass',
         'imagemin',
-        'usemin',
         'htmlmin',
         'cdn:staging',
         'compress:gzip',
@@ -22,13 +21,12 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'useminPrepare',
         'concat',
+        'cssmin',
         'uglify',
-        // 'cssmin', // Uncomment this line if using none-sass style
-        // 'requirejs:dist', // Uncomment this line if using RequireJS in your project
-        'rev',
+        'filerev',
+        'usemin',
         'copy:compass',
         'imagemin',
-        'usemin',
         'htmlmin',
         'cdn:dist',
         'compress:gzip',
