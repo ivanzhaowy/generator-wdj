@@ -3,6 +3,8 @@ module.exports = function (grunt) {
         grunt.fatal('Project name has not been set correctly! ');
     }
 
+    var expireDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+
     grunt.config.set('aws_s3', {
         options: {
             accessKeyId: '',
@@ -16,7 +18,8 @@ module.exports = function (grunt) {
                 bucket: 'web-statics-staging',
                 differential: true,
                 params: {
-                    CacheControl: '31536000'
+                    CacheControl: '31536000',
+                    Expires: expireDate
                 }
             },
             files: [{
@@ -30,7 +33,8 @@ module.exports = function (grunt) {
                 src: ['**/*.js.map'],
                 dest: '<%= paths.project %>/',
                 params: {
-                    CacheControl: 'no-cache'
+                    CacheControl: 'no-cache',
+                    Expires: expireDate
                 }
             }, {
                 expand: true,
@@ -47,7 +51,8 @@ module.exports = function (grunt) {
                 bucket: 'web-statics-production',
                 differential: true,
                 params: {
-                    CacheControl: '31536000'
+                    CacheControl: '31536000',
+                    Expires: expireDate
                 }
             },
             files: [{
@@ -61,7 +66,8 @@ module.exports = function (grunt) {
                 src: ['**/*.js.map'],
                 dest: '<%= paths.project %>/',
                 params: {
-                    CacheControl: 'no-cache'
+                    CacheControl: 'no-cache',
+                    Expires: expireDate
                 }
             }, {
                 expand: true,
