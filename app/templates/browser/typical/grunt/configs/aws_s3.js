@@ -29,15 +29,6 @@ module.exports = function (grunt) {
                 dest: '<%= paths.project %>/'
             }, {
                 expand: true,
-                cwd: '<%= paths.dist %>',
-                src: ['**/*.js.map'],
-                dest: '<%= paths.project %>/',
-                params: {
-                    CacheControl: 'no-cache',
-                    Expires: expireDate
-                }
-            }, {
-                expand: true,
                 cwd: 'gzip',
                 src: ['**'],
                 dest: '<%= paths.project %>/',
@@ -60,15 +51,6 @@ module.exports = function (grunt) {
                 cwd: '<%= paths.dist %>',
                 src: ['**', '!**/*.css', '!**/*.js', '!**/*.js.map'],
                 dest: '<%= paths.project %>/'
-            }, {
-                expand: true,
-                cwd: '<%= paths.dist %>',
-                src: ['**/*.js.map'],
-                dest: '<%= paths.project %>/',
-                params: {
-                    CacheControl: 'no-cache',
-                    Expires: expireDate
-                }
             }, {
                 expand: true,
                 cwd: 'gzip',
