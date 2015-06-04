@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             },
             expand: true,
             cwd: '<%= paths.dist %>/',
-            src: ['**/*.js', '**/*.css'],
+            src: ['**/*.js', '**/*.css', '**/*.js.map'],
             dest: 'gzip/'
         }
     });
