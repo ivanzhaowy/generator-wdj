@@ -1,3 +1,35 @@
+<a name="0.5.0"></a>
+## 0.5.0 (2015-06-08)
+
+
+#### Bug Fixes
+
+* Improve robust ([ca14a840](http://github.com/wandoulabs/generator-wdj/commit/ca14a8404cd00253bb5e25ac28694096315dacf8))
+* Remove quire of lodash ([93181905](http://github.com/wandoulabs/generator-wdj/commit/931819057f992b66b27c9368fdf5f3a3e10e19a4))
+* Clean Polymer support ([996b0c2f](http://github.com/wandoulabs/generator-wdj/commit/996b0c2fbf716183662792239a3830c8c01ab71d))
+* Change vulcanize order and copy less file ([3644154e](http://github.com/wandoulabs/generator-wdj/commit/3644154e99937fe1d77adccb3077d95c3ab6062c))
+* Min bug and copy only useful files to dist/components and project name bug ([c00879fb](http://github.com/wandoulabs/generator-wdj/commit/c00879fbdceea1c87253894166be937579c08edb))
+* Rm custom polymer Gruntfile and Style polish ([984cdfac](http://github.com/wandoulabs/generator-wdj/commit/984cdfac81c61644f4b78ce1137a88177a69747d))
+* Correct Code Style and Rm unuseful file ([aa9bd292](http://github.com/wandoulabs/generator-wdj/commit/aa9bd292d2f1d982646be674d949377c252a21d8))
+* Ignore Gziped files ([f4ffb744](http://github.com/wandoulabs/generator-wdj/commit/f4ffb744562c2761b59ab19544ba6b30753f82c6))
+* Correct CDN path ([b95c6915](http://github.com/wandoulabs/generator-wdj/commit/b95c69152bb1f1f7101314dd38b3cbb960396d50))
+* Reload grunt when Gruntfile.js changed ([77a2dc80](http://github.com/wandoulabs/generator-wdj/commit/77a2dc80b76e1273ce377fdd74b4e5cf933226f6))
+* remove duplicated Readme.md ([2a03a3aa](http://github.com/wandoulabs/generator-wdj/commit/2a03a3aa246fb75427e9353ff52962faf0222bb1))
+
+
+#### Features
+
+* Add expires header ([cd51a3f9](http://github.com/wandoulabs/generator-wdj/commit/cd51a3f9fa8d209b09db6c3dd08d746ffbaef6de))
+* Breakdown Crx's Gruntfile.js and refactor construction ([da954d88](http://github.com/wandoulabs/generator-wdj/commit/da954d883a2b0761b4e8813fe2d91cc8f28c013a))
+* Add support vulcanize inline so we no need copy polymer ([3974bcd4](http://github.com/wandoulabs/generator-wdj/commit/3974bcd4a382abf04fe0c44468290999ffa2d43c))
+* Breakdown `package.json` for reusablility's sake ([fec4bd4d](http://github.com/wandoulabs/generator-wdj/commit/fec4bd4d2438d2b4d32369f9b1f17aa383ba0b30))
+* Add support for polymer project ([1600a0c9](http://github.com/wandoulabs/generator-wdj/commit/1600a0c968f28be64802b97644dae7c8a5f619d6))
+* Support SourceMap for .js files ([f7b5a68e](http://github.com/wandoulabs/generator-wdj/commit/f7b5a68eb815247eec889d9aa0e5ec00c2a01f4c))
+* Add banner to .js files ([91389f0f](http://github.com/wandoulabs/generator-wdj/commit/91389f0f048183780a65408d5b0cf4f5c800c34a))
+* Throw fatal error when project name is 'xxx' ([195bbbb9](http://github.com/wandoulabs/generator-wdj/commit/195bbbb98876173586ed6a543c94dc1db95a4c34))
+* Refactor browser based project. ([a562ee01](http://github.com/wandoulabs/generator-wdj/commit/a562ee01c04bc6c9dc688763023d7be88ab0bb69))
+
+
 <a name="0.4.4"></a>
 ### 0.4.4 (2014-11-26)
 
