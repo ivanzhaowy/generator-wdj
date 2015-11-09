@@ -23,7 +23,7 @@ var merge = function (obj, sources) {
             }
         }
     });
-}
+};
 
 var WdjAppGenerator = module.exports = function WdjAppGenerator (args, options, config) {
     this.projectName = args[0];
@@ -37,7 +37,7 @@ var WdjAppGenerator = module.exports = function WdjAppGenerator (args, options, 
         });
     });
 
-    this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+    this.pkg = JSON.parse(require('html-wiring').readFileAsString(path.join(__dirname, '../package.json')));
 };
 
 util.inherits(WdjAppGenerator, yeoman.generators.Base);
@@ -46,7 +46,7 @@ WdjAppGenerator.prototype.askFor = function askFor() {
     var cb = this.async();
 
     if (!this.options['skip-welcome-message']) {
-        console.log(this.yeoman);
+        this.log(require('yeoman-welcome'));
     }
 
     var prompts = [{
@@ -96,88 +96,67 @@ WdjAppGenerator.prototype.askFor = function askFor() {
 };
 
 WdjAppGenerator.prototype.app = function app() {
-    var packageJson = this.src.readJSON('_package.json');
-    var bowerJson = this.src.readJSON('_bower.json');
+    var packageJson = this.fs.readJSON(this.templatePath('_package.json'));
+    var bowerJson = this.fs.readJSON(this.templatePath('_bower.json'));
 
     switch (this.projectType) {
     case 'browser':
-        var packageJsonBrowserBase = this.src.readJSON('browser/_package.json');
-
-        this.mkdir('app');
-
-        // Make bower components dir
-        this.mkdir('app/components');
-
-        // Make images dir
-        this.mkdir('app/images');
-
-        // Make JavaScript dir
-        this.mkdir('app/javascripts');
-
-        // Make compass dir
-        this.mkdir('app/compass');
-        this.mkdir('app/compass/sass');
-        this.mkdir('app/compass/images');
-
-        // Make test dir
-        this.mkdir('test/specs');
+        var packageJsonBrowserBase = this.fs.readJSON(this.templatePath('browser/_package.json'));
 
         // Copy public resources
-        this.copy('bowerrc', '.bowerrc');
+        this.fs.copy(this.templatePath('bowerrc'), this.destinationPath('.bowerrc'));
 
-        this.copy('browser/_main.scss', 'app/compass/sass/main.scss');
-        this.copy('browser/_main.js', 'app/javascripts/main.js');
-        this.copy('browser/_karma.conf.js', 'test/karma.conf.js');
-        this.copy('browser/_test-main.js', 'test/test-main.js');
-        this.copy('browser/_Gruntfile.js', 'Gruntfile.js');
-        this.directory('browser/grunt', 'grunt');
+        this.fs.copy(this.templatePath('browser/_main.scss'), this.destinationPath('app/compass/sass/main.scss'));
+        this.fs.copy(this.templatePath('browser/_main.js'), this.destinationPath('app/javascripts/main.js'));
+        this.fs.copy(this.templatePath('browser/_karma.conf.js'), this.destinationPath('test/karma.conf.js'));
+        this.fs.copy(this.templatePath('browser/_test-main.js'), this.destinationPath('test/test-main.js'));
+        this.fs.copy(this.templatePath('browser/_Gruntfile.js'), this.destinationPath('Gruntfile.js'));
+        this.fs.copy(this.templatePath('browser/grunt'), this.destinationPath('grunt'));
 
         switch (this.projectSubType) {
         case 'typical':
             // Genertate `package.json`
-            var packageJsonBrowserTypical = this.src.readJSON('browser/typical/_package.json');
+            var packageJsonBrowserTypical = this.fs.readJSON(this.templatePath('browser/typical/_package.json'));
             merge(packageJson, [packageJsonBrowserBase, packageJsonBrowserTypical]);
 
-            this.copy('browser/typical/_index.html', 'app/index.html');
-            this.directory('browser/typical/grunt', 'grunt');
+            this.fs.copy(this.templatePath('browser/typical/_index.html'), this.destinationPath('app/index.html'));
+            this.fs.copy(this.templatePath('browser/typical/grunt'), this.destinationPath('grunt'));
             break;
         case 'crx':
             // Genertate `package.json`
-            var packageJsonCrx = this.src.readJSON('browser/crx/_package.json');
+            var packageJsonCrx = this.fs.readJSON(this.templatePath('browser/crx/_package.json'));
             merge(packageJson, [packageJsonBrowserBase, packageJsonCrx]);
 
-            this.copy('browser/crx/_background.html', 'app/background.html');
-            this.copy('browser/crx/_manifest.json', 'app/manifest.json');
-            this.mkdir('app/dev');
-            this.copy('browser/crx/_reload.js', 'app/dev/reload.js');
+            this.fs.copy(this.templatePath('browser/crx/_background.html'), this.destinationPath('app/background.html'));
+            this.fs.copy(this.templatePath('browser/crx/_manifest.json'), this.destinationPath('app/manifest.json'));
+            this.fs.copy(this.templatePath('browser/crx/_reload.js'), this.destinationPath('app/dev/reload.js'));
 
-            this.directory('browser/crx/grunt', 'grunt');
+            this.fs.copy(this.templatePath('browser/crx/grunt'), this.destinationPath('grunt'));
             break;
         case 'polymer':
             // Genertate `package.json`
-            var packageJsonPolymer = this.src.readJSON('browser/polymer/_package.json');
+            var packageJsonPolymer = this.fs.readJSON(this.templatePath('browser/polymer/_package.json'));
             merge(packageJson, [packageJsonBrowserBase, packageJsonPolymer]);
 
             // Generate `bower.json`
-            var bowerJsonPolymer = this.src.readJSON('browser/polymer/_bower.json');
+            var bowerJsonPolymer = this.fs.readJSON(this.templatePath('browser/polymer/_bower.json'));
             merge(bowerJson, [bowerJsonPolymer]);
 
-            this.copy('browser/polymer/_index.html', 'app/index.html');
-            this.mkdir('app/elements');
-            this.copy('browser/polymer/elements/_elements.html', 'app/elements/elements.html');
+            this.fs.copy(this.templatePath('browser/polymer/_index.html'), this.destinationPath('app/index.html'));
+            this.fs.copy(this.templatePath('browser/polymer/elements/_elements.html'), this.destinationPath('app/elements/elements.html'));
 
-            this.directory('browser/typical/grunt', 'grunt');
-            this.directory('browser/polymer/grunt', 'grunt');
+            this.fs.copy(this.templatePath('browser/typical/grunt'), this.destinationPath('grunt'));
+            this.fs.copy(this.templatePath('browser/polymer/grunt'), this.destinationPath('grunt'));
             break;
         }
         break;
     case 'node':
         // Genertate `package.json`
-        var packageJsonNode = this.src.readJSON('_package_node.json');
+        var packageJsonNode = this.fs.readJSON(this.templatePath('_package_node.json'));
         merge(packageJson, packageJsonNode);
 
-        this.copy('_package_node.json', 'package.json');
-        this.copy('_Gruntfile_node.js', 'Gruntfile.js');
+        this.fs.copy(this.templatePath('_package_node.json'), this.destinationPath('package.json'));
+        this.fs.copy(this.templatePath('_Gruntfile_node.js'), this.destinationPath('Gruntfile.js'));
         break;
     case 'sails':
         this.copy('_bower.json', 'bower.json');
@@ -185,14 +164,14 @@ WdjAppGenerator.prototype.app = function app() {
         break;
     }
 
-    this.dest.write('bower.json', JSON.stringify(bowerJson, null, 4));
-    this.dest.write('package.json', JSON.stringify(packageJson, null, 4));
+    this.fs.write(this.destinationPath('bower.json'), JSON.stringify(bowerJson, null, 4));
+    this.fs.write(this.destinationPath('package.json'), JSON.stringify(packageJson, null, 4));
 };
 
 WdjAppGenerator.prototype.projectfiles = function projectfiles() {
-    this.copy('_README.md', 'README.md');
-    this.copy('gitignore', '.gitignore');
-    this.copy('_travis.yml', '.travis.yml');
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
+    this.fs.copy(this.templatePath('_README.md'), this.destinationPath('README.md'));
+    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('_travis.yml'), this.destinationPath('.travis.yml'));
+    this.fs.copy(this.templatePath('editorconfig'), this.destinationPath('.editorconfig'));
+    this.fs.copy(this.templatePath('jshintrc'), this.destinationPath('.jshintrc'));
 };
