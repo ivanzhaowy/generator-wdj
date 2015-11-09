@@ -159,8 +159,14 @@ WdjAppGenerator.prototype.app = function app() {
         this.fs.copy(this.templatePath('_Gruntfile_node.js'), this.destinationPath('Gruntfile.js'));
         break;
     case 'sails':
-        this.copy('_bower.json', 'bower.json');
-        this.directory('sails', './');
+        // Genertate `package.json`
+        var packageJsonSails = this.fs.readJSON(this.templatePath('sails/package.json'));
+        packageJson = packageJsonSails;
+
+        this.fs.copy(this.templatePath('bowerrcsails'), this.destinationPath('.bowerrc'));
+        this.fs.copy(this.templatePath('_bower.json'), this.destinationPath('bower.json'));
+        this.fs.copy(this.templatePath('sails'), this.destinationRoot());
+        this.fs.copy(this.templatePath('sailsrc'), this.destinationPath('.sailsrc'));
         break;
     }
 
