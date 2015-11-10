@@ -18,7 +18,7 @@
         "test": "mocha"
     },
     "dependencies" : {
-        "yeoman-generator" : "0.16.0"
+        "yeoman-generator" : "0.21.1"
     },
     "devDependencies" : {
         "grunt" : "0.4.5",
@@ -69,7 +69,5 @@
         "node" : ">=0.8.0",
         "npm" : ">=1.2.10"
     },
-    "licenses" : [{
-        "type" : "MIT"
-    }]
+    "license" : "MIT"
 }
