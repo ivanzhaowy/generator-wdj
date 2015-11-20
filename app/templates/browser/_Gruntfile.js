@@ -41,7 +41,8 @@ module.exports = function (grunt) {
             tmp: '.tmp',
             test: 'test',
             port: 9999,
-            project: '<%= projectName || 'xxx' %>'
+            // project: '<%= projectName || 'xxx' %>'
+            project: 'wandouProject'
         }
     });
 

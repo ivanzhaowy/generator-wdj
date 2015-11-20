@@ -8,7 +8,7 @@
  * assets folder into the .tmp/public directory.
  *
  * # build task config
- * Copies all directories nd files from the .tmp/public directory into a www directory.
+ * Copies all directories and files from the .tmp/public directory into a www directory.
  *
  * For usage docs see:
  * 		https://github.com/gruntjs/grunt-contrib-copy
@@ -20,18 +20,25 @@ module.exports = function(grunt) {
 			files: [{
 				expand: true,
 				cwd: './assets',
-				src: ['**/*.!(coffee|less)'],
+				src: ['**/*.!(scss)'],
 				dest: '.tmp/public'
 			}]
 		},
 		build: {
-			files: [{
-				expand: true,
-				cwd: '.tmp/public',
-				src: ['**/*'],
-				dest: 'www'
-			}]
-		}
+      files: [{
+        expand: true,
+        src: ['**/*',
+              '!.tmp*',
+              '!.tmp/*',
+              '!.git*',
+              '!.git/*',
+              '!.editorconfig',
+              '!.travis.yml',
+              '!.jshintrc',
+              '!*.sublime*'],
+        dest: 'dist',
+      }]
+    }
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-copy');
