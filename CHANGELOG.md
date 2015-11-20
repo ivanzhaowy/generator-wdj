@@ -1,3 +1,13 @@
+<a name="0.5.1"></a>
+### 0.5.1 (2015-11-20)
+
+
+#### Features
+
+* add new sails template ([2c453678](http://github.com/wandoulabs/generator-wdj/commit/2c453678f707ebdbeda81a073f75c3336f2e1599))
+* delete old sails template ([0f82574e](http://github.com/wandoulabs/generator-wdj/commit/0f82574e9af8e17ac68d8c6a1054aa97c46af74b))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0 (2015-06-08)
 
